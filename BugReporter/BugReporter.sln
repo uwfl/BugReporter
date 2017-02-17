@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugReporter", "BugReporter\BugReporter.csproj", "{9611E5CD-1084-4212-9607-DFEF2AD6DA26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugReporterDemo", "BugReporterDemo\BugReporterDemo.csproj", "{4BF60371-3166-44C9-8D84-D66EA814AE4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugReporter", "BugReporter\BugReporter.csproj", "{EBF8EDA0-8293-45F9-B1BA-4DF19230F102}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9611E5CD-1084-4212-9607-DFEF2AD6DA26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9611E5CD-1084-4212-9607-DFEF2AD6DA26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9611E5CD-1084-4212-9607-DFEF2AD6DA26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9611E5CD-1084-4212-9607-DFEF2AD6DA26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BF60371-3166-44C9-8D84-D66EA814AE4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BF60371-3166-44C9-8D84-D66EA814AE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BF60371-3166-44C9-8D84-D66EA814AE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BF60371-3166-44C9-8D84-D66EA814AE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF8EDA0-8293-45F9-B1BA-4DF19230F102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF8EDA0-8293-45F9-B1BA-4DF19230F102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF8EDA0-8293-45F9-B1BA-4DF19230F102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF8EDA0-8293-45F9-B1BA-4DF19230F102}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BugReporter.Properties
+namespace BugReporterDemo.Properties
 {
 
 

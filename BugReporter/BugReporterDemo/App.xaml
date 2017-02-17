@@ -1,7 +1,7 @@
-﻿<Application x:Class="BugReporter.App"
+﻿<Application x:Class="BugReporterDemo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:BugReporter"
+             xmlns:local="clr-namespace:BugReporterDemo"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
