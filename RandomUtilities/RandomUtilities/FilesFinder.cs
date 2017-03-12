@@ -12,18 +12,29 @@ namespace RandomUtilities
         public static List<InputFile> DirectorySearch(string directory)
         {
             var results = new List<InputFile>();
-            DirectorySearch(directory, results);
+            DirectorySearch(directory, new List<string>(), results);
 
             return results;
         }
 
-        private static List<InputFile> DirectorySearch(string directory, List<InputFile> results)
+        public static List<InputFile> DirectorySearch(string directory, List<string> ignoredDirectories)
         {
+            var results = new List<InputFile>();
+            DirectorySearch(directory, ignoredDirectories, results);
+
+            return results;
+        }
+
+        private static List<InputFile> DirectorySearch(string directory, List<string> ignoredDirectories, List<InputFile> results)
+        {
+            if (ignoredDirectories.Any(d => directory.EndsWith(d)))
+                return results;
+
             try
             {
                 foreach (string subDirectory in Directory.GetDirectories(directory))
                 {
-                    DirectorySearch(subDirectory, results);
+                    DirectorySearch(subDirectory, ignoredDirectories, results);
                 }
 
                 foreach (string f in Directory.GetFiles(directory))

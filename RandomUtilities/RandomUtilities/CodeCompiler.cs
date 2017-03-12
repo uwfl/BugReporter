@@ -14,32 +14,47 @@ namespace RandomUtilities
     {
         public static string MergeClassFiles(List<InputFile> classfiles)
         {
-
+            var classDictionaries = new Dictionary<string, List<string>>();
             var usingDirectives = new List<string>();
             var codeLines = new List<string>();
+            var subCode = new List<string>();
 
+            var sb = new StringBuilder();
             foreach (var c in classfiles)
             {
                 if (File.Exists(c.FilePath))
                 {
+
                     var content = File.ReadAllLines(c.FilePath);
 
-                    usingDirectives.AddRange(content.Where(l => l.StartsWith("using")).ToList());
-                    codeLines.AddRange(content.Where(l => !l.StartsWith("using")).ToList());
+                    usingDirectives = content.Where(l => l.StartsWith("using")).ToList();
+                    codeLines = content.Where(l => !l.StartsWith("using")).ToList();
+
+                    var namespaceDefinitions = codeLines.Where(l => l.StartsWith("namespace")).ToList();
+                    foreach (var namespaceDefinition in namespaceDefinitions)
+                    {
+                        int namespaceLine = codeLines.IndexOf(namespaceDefinition);
+                        subCode = codeLines.GetRange(namespaceLine, codeLines.Count - namespaceLine);
+                        int bracketLine = subCode.IndexOf("{") + namespaceLine;
+
+                        codeLines.InsertRange(bracketLine + 1, usingDirectives);
+                    }
+
+                    var className = c.Filename.Replace(c.Extension, "");
+                    if (classDictionaries.ContainsKey(className))
+                    {
+                        classDictionaries[className].AddRange(codeLines);
+                    }
+                    else
+                    {
+                        classDictionaries.Add(className, codeLines);
+                    }
+
+                    foreach (var codeLine in codeLines)
+                    {
+                        sb.AppendLine(codeLine);
+                    }
                 }
-            }
-
-            var sb = new StringBuilder();
-
-            usingDirectives = usingDirectives.Distinct().ToList();
-            foreach (var usingDirective in usingDirectives)
-            {
-                sb.AppendLine(usingDirective);
-            }
-
-            foreach (var codeLine in codeLines)
-            {
-                sb.AppendLine(codeLine);
             }
             
             return sb.ToString();
@@ -64,7 +79,13 @@ namespace RandomUtilities
             CompilerResults results = provider.CompileAssemblyFromSource(parameters, classfile.Content);
         }
 
-        public static bool CompileExecutable(String sourceName, bool executable)
+
+        public static bool Compile(String sourceName, bool executable)
+        {
+            return Compile(sourceName, executable, new List<string>());
+        }
+
+        public static bool Compile(String sourceName, bool executable, List<string> referencedAssemblies)
         {
             FileInfo sourceFile = new FileInfo(sourceName);
             CodeDomProvider provider = null;
@@ -95,6 +116,7 @@ namespace RandomUtilities
                     (executable) ? "exe" : "dll");
 
                 CompilerParameters cp = new CompilerParameters();
+                cp.ReferencedAssemblies.AddRange(referencedAssemblies.ToArray());
 
                 // Generate an executable instead of 
                 // a class library.
